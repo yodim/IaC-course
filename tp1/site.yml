@@ -1,0 +1,32 @@
+---
+# TP1, étape 3 : la même installation avec Ansible.
+# Lancé par le formateur, en démonstration, sur la VM vm-demo.
+# Usage : ansible-playbook site.yml   (deux fois de suite)
+- name: Installation de Nginx et PostgreSQL
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: Paquets installés
+      ansible.builtin.apt:
+        name: [nginx, postgresql]
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Services démarrés et activés
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop: [nginx, postgresql]
+
+    - name: Page d'accueil du groupe
+      ansible.builtin.copy:
+        content: "<h1>Configured with Ansible!</h1>\n"
+        dest: /var/www/html/index.html
+        mode: "0644"
+
+    - name: db.local déclaré
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        line: "127.0.0.1 db.local"

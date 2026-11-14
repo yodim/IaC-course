@@ -1,0 +1,21 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.plan
+crash.log
+
+# Ansible
+*.retry
+.vault_pass*
+
+# Clés privées
+*.pem
+id_rsa
+id_ed25519
+
+# Éditeurs et systèmes
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

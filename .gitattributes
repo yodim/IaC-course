@@ -1,0 +1,3 @@
+# Fins de ligne Unix pour les scripts et le code, même depuis Windows
+* text=auto eol=lf
+*.pem binary

@@ -9,22 +9,17 @@ Les TP sont publiés au fil des séances. Pensez à faire un `git pull` avant ch
 | Séance | TP | Thème | Dossier |
 | --- | --- | --- | --- |
 | 1 | TP1 | Configuration manuelle et automatisée | `tp1/` |
-| 2 | TP2, partie 1 | Une machine virtuelle sur Azure avec Terraform | `tp2/partie1/` |
-| 3 | TP2, partie 2 | Modules et état distant | `tp2/partie2/` |
-| 4 | TP3, partie 1 | Configurer les VM avec Ansible | `tp3/partie1/` |
-| 5 | TP3, partie 2 | Rôles, Ansible Vault et déploiement | `tp3/partie2/` |
-| 6 | TP4 | Pipeline CI/CD et sécurité | `tp4/` |
 
-Un dossier qui n'apparaît pas encore ici n'a pas encore été publié.
+Les TP suivants s'ajouteront à ce tableau au fil des séances.
 
 ## Comment utiliser ce dépôt
 
-Ce dépôt sert de point de départ : on n'y travaille pas directement. Chaque groupe a son propre dépôt GitHub, et y copie les fichiers fournis au début de chaque TP. Par exemple, pour la séance 2 :
+Ce dépôt sert de point de départ : on n'y travaille pas directement. Chaque groupe a son propre dépôt GitHub, et y copie les fichiers fournis au début de chaque TP :
 
 ```bash
 git clone https://github.com/yodim/IaC-course.git ~/IaC-course   # une seule fois
 cd ~/IaC-course && git pull                                       # avant chaque séance
-cp -r ~/IaC-course/tp2/partie1 ~/<depot-du-groupe>/tp2
+cp -r ~/IaC-course/<dossier-du-tp> ~/<depot-du-groupe>/
 ```
 
 Chaque TP ajoute une brique au précédent, et le projet de groupe assemble le tout. Gardez donc votre code d'une séance à l'autre.
@@ -50,5 +45,5 @@ az login
 ## Règles communes
 
 - Aucun secret dans un dépôt : pas de clé privée, pas de mot de passe en clair, pas de fichier d'état Terraform.
-- En fin de séance, aucune ressource Azure ne doit rester active, sauf le compte de stockage de l'état à partir de la séance 3.
+- En fin de séance, aucune ressource Azure ne doit rester active, sauf indication contraire dans l'énoncé du TP.
 - Suivez votre consommation dans Education Hub et créez un budget avec une alerte par courriel.

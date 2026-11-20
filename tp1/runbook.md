@@ -1,4 +1,4 @@
-# Runbook : installation manuelle de Nginx et PostgreSQL
+# Runbook : installation manuelle de Nginx
 
 - Groupe :
 - Membres :
@@ -28,7 +28,7 @@ Commande :
 
 Résultat et remarques :
 
-## 3. Installer Nginx et PostgreSQL
+## 3. Installer Nginx
 
 Commande :
 
@@ -38,29 +38,29 @@ Commande :
 
 Résultat et remarques :
 
-## 4. Démarrer et activer les deux services
-
-Commande :
-
-```bash
-
-```
-
-Résultat et remarques :
-
-## 5. Remplacer la page d'accueil de Nginx
-
-Commande :
-
-```bash
-
-```
-
-Résultat et remarques :
-
-## 6. Vérifier que tout répond
+## 4. Vérifier que Nginx tourne et démarre au boot
 
 Commandes :
+
+```bash
+
+```
+
+Résultat et remarques :
+
+## 5. Remplacer la page d'accueil par le nom du groupe
+
+Commande :
+
+```bash
+
+```
+
+Résultat et remarques :
+
+## 6. Vérifier que la page répond sur le port 80
+
+Commande :
 
 ```bash
 

@@ -1,13 +1,13 @@
-# Comparaison des trois méthodes
+# Comparaison des approches
 
 Groupe :
 
-Remplissez les lignes « À la main » et « Script bash » avec vos propres mesures. La ligne « Playbook Ansible » se remplit pendant le bilan, à partir de la démonstration.
+Remplissez les lignes « À la main » et « Script » avec vos propres mesures. Pour la colonne « Temps », estimez le temps qu'il faudrait pour faire votre partie sur 20 serveurs. La ligne « Playbook Ansible » se remplit pendant le bilan, à partir de la démonstration.
 
-| Méthode | Temps | Erreurs | 2e exécution |
+| Méthode | Temps pour 20 serveurs | Erreurs | 2e exécution |
 | --- | --- | --- | --- |
-| À la main | | | |
-| Script bash | | | |
+| À la main (Nginx) | | | |
+| Script (PostgreSQL) | | | |
 | Playbook Ansible (démonstration) | | | |
 
 ## Questions de l'étape 2
@@ -16,10 +16,10 @@ Remplissez les lignes « À la main » et « Script bash » avec vos propres mes
 
 2. Combien de lignes `db.local` contient `/etc/hosts` ?
 
-3. Le script s'est-il arrêté avant la fin ? Pourquoi ?
+3. La commande `createdb` a-t-elle tourné ? Pourquoi ?
 
-4. Comment le rendre idempotent, et à quel prix ?
+4. Et si l'erreur était sur la première ligne ?
 
 ## Conclusion du groupe
 
-En deux ou trois phrases : quelle différence entre le script et le playbook, et laquelle des trois méthodes choisiriez-vous pour configurer dix serveurs ?
+En deux ou trois phrases : quelle différence entre le script et le playbook, et quelle approche choisiriez-vous pour configurer vingt serveurs ?

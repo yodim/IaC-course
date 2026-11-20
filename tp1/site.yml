@@ -1,7 +1,7 @@
 ---
-# TP1, étape 3 : la même installation avec Ansible.
-# Lancé par le formateur, en démonstration, sur la VM vm-demo.
-# Usage : ansible-playbook site.yml   (deux fois de suite)
+# TP1, étape 3 : Nginx et PostgreSQL avec Ansible.
+# Lancé par le formateur, en démonstration, sur son poste.
+# Usage : ansible-playbook -i localhost, site.yml -K   (deux fois de suite)
 - name: Installation de Nginx et PostgreSQL
   hosts: localhost
   connection: local

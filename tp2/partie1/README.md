@@ -6,7 +6,7 @@ Séance 2.
 
 Écrire une configuration Terraform qui crée une machine virtuelle Linux accessible en SSH depuis la salle, puis la faire évoluer et la détruire.
 
-Le TP se fait sur Azure, avec un abonnement Azure for Students. Un groupe qui n'a pas pu activer Azure peut le faire sur AWS, avec un compte personnel : les étapes et les questions sont les mêmes, seul le code change. Chaque groupe choisit **un seul** cloud pour tout le TP.
+Le TP se fait sur Azure. Un groupe qui n'a pas pu activer Azure peut le faire sur AWS, avec un compte personnel : les étapes et les questions sont les mêmes, seul le code change. Chaque groupe choisit **un seul** cloud pour tout le TP.
 
 ## Choisir son cloud
 
@@ -211,17 +211,10 @@ Dans les deux cas, en fin de séance, aucune ressource ne doit rester active.
 
 ## Rapport à rendre
 
-Chaque groupe rend un rapport en PDF, `tp2/rapport.pdf`, de 3 à 5 pages avec les captures. Il explique ce que vous avez fait, étape par étape, de façon qu'un lecteur qui n'était pas dans la salle puisse suivre.
+Chaque groupe rend un rapport en PDF, de 3 à 5 pages avec les captures. Il explique ce que vous avez fait, étape par étape, avec les réponses aux questions (étape 5 et 6).
 
-1. **Page de garde :** groupe, membres, cloud utilisé (Azure ou AWS) et région.
-2. **Architecture déployée :** un schéma simple et la liste des ressources créées, avec le rôle de chacune.
-3. **Déroulement, étape par étape (étapes 1 à 6) :** pour chaque étape, ce que vous avez fait, les commandes importantes, ce que vous avez observé, et les difficultés rencontrées avec leur solution.
-4. **Réponses aux questions :** les trois questions de l'étape 5, les deux plans de l'étape 6 expliqués (extraits du plan à l'appui), et la question de réflexion.
-5. **Captures :** la sortie du plan, la fin de l'`apply`, la connexion SSH, les deux plans de l'étape 6 et la preuve de la destruction (portail ou console vide).
+Un `README.md` dans le dossier `tp2` est souhaitable.
 
-Un `README.md` dans le dossier `tp2` est souhaitable : quelques lignes pour dire quel cloud est utilisé et comment déployer puis détruire l'infrastructure.
-
-Le rapport et le code sont à pousser avant la séance 3.
 
 ## À pousser dans le dépôt du groupe
 
@@ -236,7 +229,6 @@ tp2/
 ├── .terraform.lock.hcl
 ├── .gitignore
 ├── README.md          (souhaitable)
-├── rapport.pdf
 └── captures/
 ```
 
@@ -245,10 +237,3 @@ Aucun fichier d'état, aucun plan, aucune clé privée, aucune clé d'accès AWS
 ## Question de réflexion
 
 Que se passe-t-il si deux membres du groupe lancent `terraform apply` en même temps, chacun avec son propre fichier d'état ?
-
-## Pour la séance 3
-
-- Pousser le code du TP2 et le rapport sur la branche principale du dépôt du groupe.
-- Vérifier que `terraform destroy` a bien tout supprimé.
-- Lire la documentation Terraform sur les modules.
-- Le code doit pouvoir être redéployé sans modification en début de séance 3.

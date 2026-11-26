@@ -4,12 +4,13 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 6.0"
+      version = "~> 6.23"
     }
   }
 }
 
-# Les identifiants sont lus dans ~/.aws (aws configure) ou dans AWS_PROFILE :
+# Les identifiants viennent de la session aws login (provider 6.23 ou plus récent),
+# ou de ~/.aws/credentials après aws configure :
 # rien de secret n'est écrit dans le code.
 provider "aws" {
   region = var.region

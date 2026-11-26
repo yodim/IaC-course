@@ -16,7 +16,7 @@ Le TP se fait sur Azure, avec un abonnement Azure for Students. Un groupe qui n'
 | Dossier de départ | `azure/` | `aws/` |
 | Région par défaut | `francecentral` | `eu-west-3` (Paris) |
 | Taille de la VM | `Standard_B1s` | `t3.micro` |
-| Outil en ligne de commande | Azure CLI (`az`) | AWS CLI (`aws`) |
+| Outil en ligne de commande | Azure CLI (`az`) | AWS CLI (`aws`), version 2.32 ou plus |
 
 ## L'architecture à déployer
 
@@ -82,17 +82,16 @@ Le provider a besoin de l'identifiant de l'abonnement. La variable d'environneme
 
 ### AWS
 
-Ne travaillez pas avec l'utilisateur racine du compte. Dans la console AWS, service IAM :
+Il faut l'AWS CLI en version 2.32 ou plus récente : `aws --version` pour vérifier.
 
-1. Créer un utilisateur, par exemple `terraform`, et lui attacher la stratégie `AdministratorAccess`.
-2. Dans cet utilisateur, onglet « Security credentials », créer une clé d'accès de type « Command Line Interface (CLI) ».
+Évitez de travailler avec l'utilisateur racine du compte. Dans la console AWS, service IAM, créez un utilisateur, par exemple `terraform`, avec l'accès à la console et la stratégie `AdministratorAccess`. Connectez-vous ensuite à la console avec cet utilisateur.
 
 Puis, dans WSL :
 
 ```bash
-# Enregistrer la clé d'accès : clé, clé secrète, région eu-west-3, sortie json
-aws configure
-aws sts get-caller-identity       # doit afficher l'utilisateur terraform, pas root
+# Se connecter avec ses identifiants de console
+aws login                          # à la question de la région, répondre eu-west-3
+aws sts get-caller-identity        # doit afficher l'utilisateur terraform, pas root
 
 # Préparer le dossier dans le dépôt du groupe
 cd ~/<depot-du-groupe>
@@ -100,7 +99,14 @@ cp -r ~/IaC-course/tp2/partie1/aws tp2
 cd tp2
 ```
 
-`aws configure` écrit la clé dans `~/.aws/credentials`, sur votre poste. Elle ne doit jamais apparaître dans le dépôt, ni dans le code. Le provider la lit tout seul : aucune variable d'environnement n'est nécessaire.
+`aws login` ouvre le navigateur sur la page de connexion d'AWS. Depuis WSL, si le navigateur ne s'ouvre pas, ouvrez l'adresse affichée dans le terminal, ou lancez `aws login --remote` et recopiez le code d'autorisation. La session dure jusqu'à 12 heures : il suffit de relancer `aws login` à la séance suivante. Aucun secret n'est stocké dans le dépôt, et le provider retrouve la session tout seul.
+
+Si Terraform répond `No valid credential sources found` alors que `aws sts get-caller-identity` fonctionne, revenez à une clé d'accès :
+
+1. Dans IAM, utilisateur `terraform`, onglet « Security credentials », créer une clé d'accès de type « Command Line Interface (CLI) ».
+2. Dans WSL, `aws configure` : clé, clé secrète, région `eu-west-3`, sortie `json`.
+
+`aws configure` écrit la clé dans `~/.aws/credentials`, sur votre poste. Elle ne doit jamais apparaître dans le dépôt, ni dans le code.
 
 Si vous avez un AWS Academy Learner Lab plutôt qu'un compte personnel, copiez les identifiants de la page du lab (AWS Details) dans `~/.aws/credentials`, et ajoutez `region = "us-east-1"` dans `terraform.tfvars`.
 
@@ -203,6 +209,20 @@ Sur AWS :
 
 Dans les deux cas, en fin de séance, aucune ressource ne doit rester active.
 
+## Rapport à rendre
+
+Chaque groupe rend un rapport en PDF, `tp2/rapport.pdf`, de 3 à 5 pages avec les captures. Il explique ce que vous avez fait, étape par étape, de façon qu'un lecteur qui n'était pas dans la salle puisse suivre.
+
+1. **Page de garde :** groupe, membres, cloud utilisé (Azure ou AWS) et région.
+2. **Architecture déployée :** un schéma simple et la liste des ressources créées, avec le rôle de chacune.
+3. **Déroulement, étape par étape (étapes 1 à 6) :** pour chaque étape, ce que vous avez fait, les commandes importantes, ce que vous avez observé, et les difficultés rencontrées avec leur solution.
+4. **Réponses aux questions :** les trois questions de l'étape 5, les deux plans de l'étape 6 expliqués (extraits du plan à l'appui), et la question de réflexion.
+5. **Captures :** la sortie du plan, la fin de l'`apply`, la connexion SSH, les deux plans de l'étape 6 et la preuve de la destruction (portail ou console vide).
+
+Un `README.md` dans le dossier `tp2` est souhaitable : quelques lignes pour dire quel cloud est utilisé et comment déployer puis détruire l'infrastructure.
+
+Le rapport et le code sont à pousser avant la séance 3.
+
 ## À pousser dans le dépôt du groupe
 
 ```text
@@ -215,10 +235,12 @@ tp2/
 ├── terraform.tfvars
 ├── .terraform.lock.hcl
 ├── .gitignore
+├── README.md          (souhaitable)
+├── rapport.pdf
 └── captures/
 ```
 
-Captures : la sortie du plan et la connexion SSH. Aucun fichier d'état, aucun plan, aucune clé privée, aucune clé d'accès AWS.
+Aucun fichier d'état, aucun plan, aucune clé privée, aucune clé d'accès AWS.
 
 ## Question de réflexion
 
@@ -226,7 +248,7 @@ Que se passe-t-il si deux membres du groupe lancent `terraform apply` en même t
 
 ## Pour la séance 3
 
-- Pousser le code du TP2 sur la branche principale du dépôt du groupe.
+- Pousser le code du TP2 et le rapport sur la branche principale du dépôt du groupe.
 - Vérifier que `terraform destroy` a bien tout supprimé.
 - Lire la documentation Terraform sur les modules.
 - Le code doit pouvoir être redéployé sans modification en début de séance 3.

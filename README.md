@@ -9,6 +9,7 @@ Les TP sont publiés au fil des séances. Pensez à faire un `git pull` avant ch
 | Séance | TP | Thème | Dossier |
 | --- | --- | --- | --- |
 | 1 | TP1 | Configuration manuelle et automatisée | `tp1/` |
+| 2 | TP2, partie 1 | Une machine virtuelle dans le cloud avec Terraform | `tp2/partie1/` |
 
 Les TP suivants s'ajouteront à ce tableau au fil des séances.
 
